@@ -3,47 +3,53 @@ __author__ = 'aosn'
 
 from flask import Flask, request
 import random
-from entity import Player
+from data.entity import Player
 
 app = Flask(__name__)
 
 
 # ゲーム開始時のデフォルト設定
 players = []
-DEFAULT_CASH = 1500     # 開始時の資金$1500
+DEFAULT_CASH = 1500  # 開始時の資金$1500
+
 
 @app.route("/")
 def hello():
     return "Hello World!"
 
 
-@app.route("/bdd/game/1/change", methods='PUT')
+@app.route("/bdd/game/1/change", methods=['PUT'])
 def handle_board_change():
-
-    return""
-
-
+    return ""
 
 
 @app.route("/bdd/game/1/dice")
 def handle_dice():
     die1 = random.randint(1, 6)
     die2 = random.randint(1, 6)
-    return "{dice:["+str(die1)+","+str(die2)+"]}"
+    return "{dice:[" + str(die1) + "," + str(die2) + "]}"
 
 
-@app.route("/bdd/game/new", methods = ["PUT"])
+@app.route("/bdd/game/new", methods=["PUT"])
 def handle_new():
+    """
+     Received a request to begin a game.
+    :return: game id
+    """
     global players
     joined_names = request.args.get("username", "")
 
     names = joined_names.split(",")
     players = tuple(map(lambda name, user_id: Player(name, user_id, 0, DEFAULT_CASH), names, range(1, names.length)))
 
-    return 0 #gameid
+    return 0
 
 
 def get_players():
+    """
+    Return Players instance.
+    :return: Player tuple instance
+    """
     global players
     return players
 
