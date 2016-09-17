@@ -150,5 +150,6 @@ public class MainController implements Initializable {
     }
 
     public void inShuffleClicked(Event event) {
+        // TODO: GET /bdd/game/1/dice
     }
 }
