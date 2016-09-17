@@ -10,6 +10,17 @@ public class Cell {
     private Type type;
     private CellSpec spec;
 
+    public Cell() {
+
+    }
+
+    public Cell(int id, long owner, Type type, CellSpec spec) {
+        this.id = id;
+        this.owner = owner;
+        this.type = type;
+        this.spec = spec;
+    }
+
     public int getId(){
         return id;
     }

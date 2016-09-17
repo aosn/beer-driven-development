@@ -17,6 +17,16 @@ public class CellSpec {
      */
     private int fee;
 
+    public CellSpec() {
+
+    }
+
+    public CellSpec(String landName, int price, int fee) {
+        this.landName = landName;
+        this.price = price;
+        this.fee = fee;
+    }
+
     public String getLandName() {
         return landName;
     }
