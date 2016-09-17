@@ -200,15 +200,12 @@ public class MainController implements Initializable {
         int prePosition = p.getPosition();
         int postPosition = prePosition + steps;
         if (postPosition > 40) {
-            postPosition = 1;
+            postPosition -= 40;
             p.setCash(p.getCash() + START_ADD);
         }
         p.setPosition(postPosition);
 
-        // update position indicator
-        userList.getChildren().clear();
-        userLabels = gameState.getPlayers().stream().map(this::createUserLabel).collect(Collectors.toList());
-        userList.getChildren().addAll(userLabels);
+        updatePositionIndicator();
 
         // land operation
         Cell cell = gameState.getBoard().getCells().get(postPosition - 1);
@@ -237,6 +234,13 @@ public class MainController implements Initializable {
             turn = nextTurn(turn);
         }
         userLabels.get(turn - 1).setBorder(createUserBorder(true));
+    }
+
+    private void updatePositionIndicator() {
+        // update position indicator
+        userList.getChildren().clear();
+        userLabels = gameState.getPlayers().stream().map(this::createUserLabel).collect(Collectors.toList());
+        userList.getChildren().addAll(userLabels);
     }
 
     private Label createUserLabel(Player p) {
@@ -294,6 +298,7 @@ public class MainController implements Initializable {
         return turn + 1;
     }
 
+    @FXML
     public void onBuyClicked(Event event) {
         buyButton.setDisable(true);
         cancelButton.setDisable(true);
@@ -309,18 +314,21 @@ public class MainController implements Initializable {
         c.setOwner(p.getId());
 
         // display
-        ((Label) getCell(p.getPosition()).getChildren().get(1)).setText(p.getName());
+        updatePositionIndicator();
+        // TODO:
 
         // TODO: State change
 
         next();
     }
 
+    @FXML
     public void onCancelClicked(Event event) {
         buyButton.setDisable(true);
         cancelButton.setDisable(true);
         shuffleButton.setDisable(false);
         priceLabel.setText(PRICE_LABEL_PREFIX + "--");
+        updatePositionIndicator();
         next();
     }
 }
