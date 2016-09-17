@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-class player:
-    def __init__(self,id_ ,name_ ,position_, cash_):
+class Player:
+    def __init__(self, id_, name_, position_, cash_):
         self.id = id_
         self.name = name_
         self.position = position_
@@ -10,8 +10,8 @@ class player:
     def toJson(self):
         return "{}"
 
-class cell:
-    def __init__(self,id_ , type_ , owner_ ):
+class Cell:
+    def __init__(self, id_, type_, owner_):
         self.id = id_
         self.type = type_
         self.owner = owner_
@@ -20,11 +20,15 @@ class cell:
         return "{}"
 
 
-class board:
+class Board:
+    _instance = None
     def __init__(self):
-        self.cells = []
-        # TODO celsの中身を作る
+        self.cells = list()
 
+    def __new__(cls):
+        if cls.instance_ is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
 
     def toJson(self):
         return "{}"
