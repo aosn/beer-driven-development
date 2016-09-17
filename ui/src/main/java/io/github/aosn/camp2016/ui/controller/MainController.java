@@ -1,8 +1,10 @@
 package io.github.aosn.camp2016.ui.controller;
 
 import io.github.aosn.camp2016.ui.Launcher;
+import io.github.aosn.camp2016.ui.entity.Cell;
 import io.github.aosn.camp2016.ui.entity.GameState;
 import io.github.aosn.camp2016.ui.entity.Player;
+import io.github.aosn.camp2016.ui.entity.Type;
 import io.github.aosn.camp2016.ui.stub.StubData;
 import io.github.aosn.camp2016.ui.util.Logs;
 import javafx.event.Event;
@@ -14,13 +16,14 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -33,6 +36,7 @@ public class MainController implements Initializable {
     private static final Logger log = Logger.getLogger(MainController.class.getName());
 
     private static int START_ADD = 200;
+    private static String PRICE_LABEL_PREFIX = "Price: ";
 
     @FXML
     public VBox wrapper;
@@ -124,10 +128,16 @@ public class MainController implements Initializable {
     public VBox cell39;
     @FXML
     public VBox cell40;
+    @FXML
+    public Label priceLabel;
+    @FXML
+    public Button buyButton;
+    @FXML
+    public Button cancelButton;
 
     private List<Label> userLabels;
     private int turn = 1;
-    private List<Player> players;
+    private GameState gameState;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -135,12 +145,21 @@ public class MainController implements Initializable {
 
         dice1.setText("0");
         dice2.setText("0");
+        buyButton.setDisable(true);
+        cancelButton.setDisable(true);
+        priceLabel.setText(PRICE_LABEL_PREFIX + "--");
 
-        GameState gameState = StubData.createGame(); // TODO: GET /bdd/game/1/state
-        players = gameState.getPlayers();
-        userLabels = players.stream().map(this::createUserLabel).collect(Collectors.toList());
+        gameState = StubData.createGame(); // TODO: GET /bdd/game/1/state
+        userLabels = gameState.getPlayers().stream().map(this::createUserLabel).collect(Collectors.toList());
         userList.getChildren().addAll(userLabels);
         userLabels.get(turn - 1).setBorder(createUserBorder(true));
+
+        // Load pricing
+        List<Cell> cells = gameState.getBoard().getCells();
+        for (int i = 0; i < cells.size(); i++) {
+            getCell(i + 1).getChildren().add(createPriceLabel(cells.get(i)));
+        }
+        getAllCell().forEach(c -> c.getChildren().add(new Label()));
 
         // TODO: PUSH State
 
@@ -177,7 +196,7 @@ public class MainController implements Initializable {
 
         // move
         int steps = dice.getKey() + dice.getValue();
-        Player p = players.get(turn - 1);
+        Player p = gameState.getPlayers().get(turn - 1);
         int prePosition = p.getPosition();
         int postPosition = prePosition + steps;
         if (postPosition > 40) {
@@ -187,14 +206,35 @@ public class MainController implements Initializable {
         p.setPosition(postPosition);
 
         // update position indicator
-        userLabels = players.stream().map(this::createUserLabel).collect(Collectors.toList());
         userList.getChildren().clear();
+        userLabels = gameState.getPlayers().stream().map(this::createUserLabel).collect(Collectors.toList());
         userList.getChildren().addAll(userLabels);
 
+        // land operation
+        Cell cell = gameState.getBoard().getCells().get(postPosition - 1);
+        if (cell.getType() == Type.LAND) {
+            if (cell.getOwner() < 0) {
+                // buy
+                buyButton.setDisable(false);
+                cancelButton.setDisable(false);
+                shuffleButton.setDisable(true);
+                priceLabel.setText(PRICE_LABEL_PREFIX + cell.getSpec().getPrice());
+            } else if (cell.getOwner() != p.getId()) {
+                p.setCash(p.getCash() - cell.getSpec().getFee());
+                Player owner = getPlayer(cell.getOwner());
+                owner.setCash(owner.getCash() + cell.getSpec().getFee());
+            } else {
+                // Currently do nothing (Rank up?)
+            }
+        }
+        next();
+    }
+
+    private void next() {
         // next
-        turn++;
-        if (turn > players.size()) {
-            turn = 1;
+        turn = nextTurn(turn);
+        while (gameState.getPlayers().get(turn - 1).getCash() < 0) {
+            turn = nextTurn(turn);
         }
         userLabels.get(turn - 1).setBorder(createUserBorder(true));
     }
@@ -210,6 +250,14 @@ public class MainController implements Initializable {
 
     private Border createUserBorder(boolean turned) {
         return new Border(new BorderStroke(turned ? Color.RED : Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(3)));
+    }
+
+    private Label createPriceLabel(Cell c) {
+        if (c.getType() == Type.LAND) {
+            return new Label(c.getSpec().getPrice() + " " + c.getSpec().getFee());
+        } else {
+            return new Label();
+        }
     }
 
     private Label createUserPosition(Player p) {
@@ -228,5 +276,51 @@ public class MainController implements Initializable {
 
     private VBox getCell(int position) {
         return getAllCell().get(position - 1);
+    }
+
+    private Player getPlayer(long id) {
+        Optional<Player> opt = gameState.getPlayers().stream().filter(p -> p.getId() == id).findFirst();
+        if (opt.isPresent()) {
+            return opt.get();
+        } else {
+            throw new RuntimeException("Player not found: " + id);
+        }
+    }
+
+    private int nextTurn(int turn) {
+        if (turn >= gameState.getPlayers().size()) {
+            return 1;
+        }
+        return turn + 1;
+    }
+
+    public void onBuyClicked(Event event) {
+        buyButton.setDisable(true);
+        cancelButton.setDisable(true);
+        shuffleButton.setDisable(false);
+        priceLabel.setText(PRICE_LABEL_PREFIX + "--");
+
+        // buy
+        Player p = gameState.getPlayers().get(turn - 1);
+        Cell c = gameState.getBoard().getCells().get(p.getPosition() - 1);
+        p.setCash(p.getCash() - c.getSpec().getPrice());
+
+        // owner set
+        c.setOwner(p.getId());
+
+        // display
+        ((Label) getCell(p.getPosition()).getChildren().get(1)).setText(p.getName());
+
+        // TODO: State change
+
+        next();
+    }
+
+    public void onCancelClicked(Event event) {
+        buyButton.setDisable(true);
+        cancelButton.setDisable(true);
+        shuffleButton.setDisable(false);
+        priceLabel.setText(PRICE_LABEL_PREFIX + "--");
+        next();
     }
 }

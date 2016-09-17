@@ -245,9 +245,38 @@
                         <Font size="39.0" />
                      </font>
                   </Button>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="priceLabel" alignment="CENTER" contentDisplay="CENTER" text="Price: " textAlignment="CENTER">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="buyButton" mnemonicParsing="false" text="Buy" onMouseClicked="#onBuyClicked">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" onMouseClicked="#onCancelClicked">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </center>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </BorderPane>
       <HBox fx:id="userList" prefHeight="0.0" prefWidth="727.0">
          <padding>
