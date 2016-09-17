@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
@@ -30,6 +31,9 @@ import java.util.stream.Collectors;
 public class MainController implements Initializable {
 
     private static final Logger log = Logger.getLogger(MainController.class.getName());
+
+    private static int START_ADD = 200;
+
     @FXML
     public VBox wrapper;
     @FXML
@@ -123,6 +127,7 @@ public class MainController implements Initializable {
 
     private List<Label> userLabels;
     private int turn = 1;
+    private List<Player> players;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -132,11 +137,10 @@ public class MainController implements Initializable {
         dice2.setText("0");
 
         GameState gameState = StubData.createGame(); // TODO: GET /bdd/game/1/state
-        List<Player> players = gameState.getPlayers();
+        players = gameState.getPlayers();
         userLabels = players.stream().map(this::createUserLabel).collect(Collectors.toList());
         userList.getChildren().addAll(userLabels);
         userLabels.get(turn - 1).setBorder(createUserBorder(true));
-        getCell(1).getChildren().addAll(players.stream().map(this::createUserPosition).collect(Collectors.toList()));
 
         // TODO: PUSH State
 
@@ -170,10 +174,33 @@ public class MainController implements Initializable {
         Pair<Integer, Integer> dice = StubData.doShuffle();
         dice1.setText(dice.getKey().toString());
         dice2.setText(dice.getValue().toString());
+
+        // move
+        int steps = dice.getKey() + dice.getValue();
+        Player p = players.get(turn - 1);
+        int prePosition = p.getPosition();
+        int postPosition = prePosition + steps;
+        if (postPosition > 40) {
+            postPosition = 1;
+            p.setCash(p.getCash() + START_ADD);
+        }
+        p.setPosition(postPosition);
+
+        // update position indicator
+        userLabels = players.stream().map(this::createUserLabel).collect(Collectors.toList());
+        userList.getChildren().clear();
+        userList.getChildren().addAll(userLabels);
+
+        // next
+        turn++;
+        if (turn > players.size()) {
+            turn = 1;
+        }
+        userLabels.get(turn - 1).setBorder(createUserBorder(true));
     }
 
     private Label createUserLabel(Player p) {
-        Label label = new Label(p.getName() + " $" + p.getCash());
+        Label label = new Label(p.getName() + " $" + p.getCash() + " @" + p.getPosition());
         label.setPadding(new Insets(10, 10, 10, 10));
         label.setBorder(createUserBorder(false));
         label.setTextFill(Color.WHITE);
@@ -191,11 +218,15 @@ public class MainController implements Initializable {
         return label;
     }
 
-    private VBox getCell(int position) {
+    private List<VBox> getAllCell() {
         return Arrays.asList(
                 cell01, cell02, cell03, cell04, cell05, cell06, cell07, cell08, cell09, cell10,
                 cell11, cell12, cell13, cell14, cell15, cell16, cell17, cell18, cell19, cell20,
                 cell21, cell22, cell23, cell24, cell25, cell26, cell27, cell28, cell29, cell30,
-                cell31, cell32, cell33, cell34, cell35, cell36, cell37, cell38, cell39, cell40).get(position - 1);
+                cell31, cell32, cell33, cell34, cell35, cell36, cell37, cell38, cell39, cell40);
+    }
+
+    private VBox getCell(int position) {
+        return getAllCell().get(position - 1);
     }
 }
