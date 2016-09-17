@@ -1,6 +1,7 @@
 package io.github.aosn.camp2016.ui.util;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
@@ -11,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class HttpClient {
+
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     public static Optional<String> get(String url) {
@@ -38,6 +40,8 @@ public class HttpClient {
     }
 
     private static String toJson(Object o) {
+//        ObjectMapper mapper = new ObjectMapper();
+//        Hoge hoge = mapper.readValue(json, Hoge.class);
         return o.toString(); //FIXME シリアライズ
     }
 
