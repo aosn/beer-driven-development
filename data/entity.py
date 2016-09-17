@@ -8,7 +8,11 @@ class Player:
         self.cash = cash_
 
     def toJson(self):
-        return "{}"
+        id_str =  "id : " + str(self.id)
+        name_str = "name : " + self.name
+        position_str = "position : " + str(self.position)
+        cash_str = "cash : " + str(self.cash)
+        return "{" + id_str + " , "+ name_str + " , "+ position_str + " , "+ cash_str + "}"
 
 class Cell:
     def __init__(self, id_, type_, owner_):
@@ -17,7 +21,10 @@ class Cell:
         self.owner = owner_
 
     def toJson(self):
-        return "{}"
+        id_str = "id : " + str(self.id)
+        type_str = "type : " + str(self.type)
+        owner_str = "owner : " + str(self.owner)
+        return "{" + id_str + " , " + type_str + " , " + owner_str + " , " + "}"
 
 
 class Board:
@@ -31,4 +38,5 @@ class Board:
         return cls._instance
 
     def toJson(self):
-        return "{}"
+        cells_str = "cells_str : " + " , ".join( map( lambda c:c.toJson() , self.cells.toJson() ) )
+        return "{ " + cells_str + " }"
