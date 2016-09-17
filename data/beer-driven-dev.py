@@ -21,11 +21,12 @@ DEFAULT_CASH = 1500  # 開始時の資金$1500
 def hello():
     return "Hello World!"
 
+
 @app.route("bdd/game/1/state")
 def handle_board_state():
-    turn_str = "turn : 0"
+    turn_str = "turn : " + str(current_player_id)
     players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
-    board_str = "board : " + Board.toJson()
+    board_str = "board : " + board.toJson()
     return "{ " + turn_str + " , " + players_str + ", " + board_str + " }"
 
 
