@@ -21,7 +21,7 @@ def hello():
 @app.route("bdd/game/1/state")
 def handle_board_state():
     turn_str = "turn : 0"
-    players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , getPlayers() ) ) + " ]"
+    players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
     board_str = "board : " + Board.toJson()
     return "{ " + turn_str + " , " + players_str + ", " + board_str + " }"
 
