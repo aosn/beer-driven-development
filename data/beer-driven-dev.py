@@ -22,7 +22,7 @@ def hello():
     return "Hello World!"
 
 
-@app.route("bdd/game/1/state")
+@app.route("/bdd/game/1/state")
 def handle_board_state():
     turn_str = "turn : " + str(current_player_id)
     players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
