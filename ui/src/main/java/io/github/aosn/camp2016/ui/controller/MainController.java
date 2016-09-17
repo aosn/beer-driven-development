@@ -1,22 +1,30 @@
 package io.github.aosn.camp2016.ui.controller;
 
 import io.github.aosn.camp2016.ui.Launcher;
+import io.github.aosn.camp2016.ui.entity.GameState;
+import io.github.aosn.camp2016.ui.entity.Player;
+import io.github.aosn.camp2016.ui.stub.StubData;
 import io.github.aosn.camp2016.ui.util.Logs;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -115,6 +123,9 @@ public class MainController implements Initializable {
     @FXML
     public VBox cell40;
 
+    private List<Label> userLabels;
+    private int turn = 1;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Logs.applyLogLevel(log);
@@ -122,7 +133,13 @@ public class MainController implements Initializable {
         dice1.setText("0");
         dice2.setText("0");
 
-        // TODO: GET /bdd/game/1/state
+        GameState gameState = StubData.createGame(); // TODO: GET /bdd/game/1/state
+        List<Player> players = gameState.getPlayers();
+        userLabels = players.stream().map(this::createUserLabel).collect(Collectors.toList());
+        userList.getChildren().addAll(userLabels);
+        userLabels.get(turn - 1).setBorder(createUserBorder(true));
+
+        // TODO: PUSH State
 
         log.info(MainController.class.getSimpleName() + " initialized.");
     }
@@ -151,5 +168,19 @@ public class MainController implements Initializable {
 
     public void inShuffleClicked(Event event) {
         // TODO: GET /bdd/game/1/dice
+        Pair<Integer, Integer> dice = StubData.doShuffle();
+        dice1.setText(dice.getKey().toString());
+        dice2.setText(dice.getValue().toString());
+    }
+
+    private Label createUserLabel(Player p) {
+        Label label = new Label(p.getName());
+        label.setPadding(new Insets(10, 10, 10, 10));
+        label.setBorder(createUserBorder(false));
+        return label;
+    }
+
+    private Border createUserBorder(boolean turned) {
+        return new Border(new BorderStroke(turned ? Color.RED : Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(3)));
     }
 }
