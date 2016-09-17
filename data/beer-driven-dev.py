@@ -4,11 +4,9 @@ __author__ = 'aosn'
 from flask import Flask, request
 import random
 import json
-from data.entity import Player
-from data.entity import Board
+from data.entity import Player, Board, Cell
 
 app = Flask(__name__)
-
 
 # ゲーム開始時のデフォルト設定
 players = []
@@ -21,7 +19,8 @@ DEFAULT_CASH = 1500  # 開始時の資金$1500
 def hello():
     return "Hello World!"
 
-@app.route("bdd/game/1/state")
+
+@app.route("bdd/game/<gameid>/state")
 def handle_board_state():
     turn_str = "turn : 0"
     players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
@@ -29,27 +28,34 @@ def handle_board_state():
     return "{ " + turn_str + " , " + players_str + ", " + board_str + " }"
 
 
-@app.route("/bdd/game/1/change", methods=['PUT'])
+@app.route("/bdd/game/<gameid>/change", methods=['PUT'])
 def handle_board_change():
     """
     Received a request to change a state.
     :return: 204(No Content)
     """
+    global players
+    global current_player_id
     global board
     content_body_dict = json.loads(request.data)
+
+    # turn
+    current_player_id = content_body_dict["turn"]
+
+    # players list
+    players_list = content_body_dict["players"]
+    players = tuple(map((lambda player_dict: Player(player_dict["id"], player_dict["name"], player_dict["position"], player_dict["cash"]),
+                         players_list)))
+
+    # board list
     board_dict = content_body_dict["board"]
     cells_dict = board_dict["cells"]
-    for cell_dict in cells_dict:
-        cell_id = cell_dict["id"]
-        type_dict = cell_dict["type"]
-        # @TODO implement
-
-    # change to next player
+    board.cells = map(lambda cell_dict: Cell(cell_dict["id"], cell_dict["type"], cell_dict["owner"]), cells_dict)
 
     return 204
 
 
-@app.route("/bdd/game/1/dice")
+@app.route("/bdd/game/<gameid>/dice")
 def handle_dice():
     die1 = random.randint(1, 6)
     die2 = random.randint(1, 6)
