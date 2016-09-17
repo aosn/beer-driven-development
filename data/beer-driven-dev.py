@@ -12,6 +12,8 @@ app = Flask(__name__)
 
 # ゲーム開始時のデフォルト設定
 players = []
+current_player_id = -1
+board = Board()
 DEFAULT_CASH = 1500  # 開始時の資金$1500
 
 
@@ -26,9 +28,25 @@ def handle_board_state():
     board_str = "board : " + Board.toJson()
     return "{ " + turn_str + " , " + players_str + ", " + board_str + " }"
 
+
 @app.route("/bdd/game/1/change", methods=['PUT'])
 def handle_board_change():
-    return ""
+    """
+    Received a request to change a state.
+    :return: 204(No Content)
+    """
+    global board
+    content_body_dict = json.loads(request.data)
+    board_dict = content_body_dict["board"]
+    cells_dict = board_dict["cells"]
+    for cell_dict in cells_dict:
+        cell_id = cell_dict["id"]
+        type_dict = cell_dict["type"]
+        # @TODO implement
+
+    # change to next player
+
+    return 204
 
 
 @app.route("/bdd/game/1/dice")
@@ -36,6 +54,7 @@ def handle_dice():
     die1 = random.randint(1, 6)
     die2 = random.randint(1, 6)
     return "{dice:[" + str(die1) + "," + str(die2) + "]}"
+
 
 @app.route("/bdd/game/new", methods=["PUT"])
 def handle_new():
