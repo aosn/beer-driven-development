@@ -1,6 +1,6 @@
 package io.github.aosn.camp2016.ui.service;
 
-public interface GameService {
+public interface EntryService {
 
     /**
      * Create new game
