@@ -3,6 +3,7 @@ __author__ = 'aosn'
 
 from flask import Flask, request
 import random
+import json
 from data.entity import Player
 from data.entity import Board
 
@@ -43,9 +44,8 @@ def handle_new():
     :return: game id
     """
     global players
-    joined_names = request.args.get("username", "")
-
-    names = joined_names.split(",")
+    content_body_dict = json.loads(request.data)
+    names = content_body_dict["users"]
     players = tuple(map(lambda name, user_id: Player(name, user_id, 0, DEFAULT_CASH), names, range(1, names.length)))
 
     return 0
