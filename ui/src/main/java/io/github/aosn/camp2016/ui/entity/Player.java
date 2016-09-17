@@ -1,5 +1,7 @@
 package io.github.aosn.camp2016.ui.entity;
 
+import javafx.scene.paint.Color;
+
 /**
  * @author akeboshi
  * @author mikan
@@ -56,22 +58,22 @@ public class Player {
         this.cash = cash;
     }
 
-    public String getColor() {
+    public Color getColor() {
         switch ((int)getId()) {
             case 1:
-                return "blue";
+                return Color.BLUE;
             case 2:
-                return "green";
+                return Color.GREEN;
             case 3:
-                return "red";
+                return Color.RED;
             case 4:
-                return "orange";
+                return Color.ORANGE;
             case 5:
-                return "brown";
+                return Color.BROWN;
             case 6:
-                return "purple";
+                return Color.PURPLE;
             default:
-                return "black";
+                return Color.BLACK;
         }
     }
 }

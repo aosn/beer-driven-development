@@ -17,10 +17,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -138,6 +136,7 @@ public class MainController implements Initializable {
         userLabels = players.stream().map(this::createUserLabel).collect(Collectors.toList());
         userList.getChildren().addAll(userLabels);
         userLabels.get(turn - 1).setBorder(createUserBorder(true));
+        getCell(1).getChildren().addAll(players.stream().map(this::createUserPosition).collect(Collectors.toList()));
 
         // TODO: PUSH State
 
@@ -174,13 +173,29 @@ public class MainController implements Initializable {
     }
 
     private Label createUserLabel(Player p) {
-        Label label = new Label(p.getName());
+        Label label = new Label(p.getName() + " $" + p.getCash());
         label.setPadding(new Insets(10, 10, 10, 10));
         label.setBorder(createUserBorder(false));
+        label.setTextFill(Color.WHITE);
+        label.setBackground(new Background(new BackgroundFill(p.getColor(), new CornerRadii(5), new Insets(0, 0, 0, 0))));
         return label;
     }
 
     private Border createUserBorder(boolean turned) {
         return new Border(new BorderStroke(turned ? Color.RED : Color.GRAY, BorderStrokeStyle.SOLID, new CornerRadii(5), new BorderWidths(3)));
+    }
+
+    private Label createUserPosition(Player p) {
+        Label label = new Label("*");
+        label.setTextFill(p.getColor());
+        return label;
+    }
+
+    private VBox getCell(int position) {
+        return Arrays.asList(
+                cell01, cell02, cell03, cell04, cell05, cell06, cell07, cell08, cell09, cell10,
+                cell11, cell12, cell13, cell14, cell15, cell16, cell17, cell18, cell19, cell20,
+                cell21, cell22, cell23, cell24, cell25, cell26, cell27, cell28, cell29, cell30,
+                cell31, cell32, cell33, cell34, cell35, cell36, cell37, cell38, cell39, cell40).get(position - 1);
     }
 }

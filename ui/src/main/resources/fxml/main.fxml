@@ -212,7 +212,7 @@
                      <children>
                         <Label fx:id="dice1" style="-fx-background-color: silver;" text="9">
                            <font>
-                              <Font size="96.0" />
+                              <Font name="Monospaced Bold" size="96.0" />
                            </font>
                            <padding>
                               <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
@@ -223,7 +223,7 @@
                         </Label>
                         <Label fx:id="dice2" style="-fx-background-color: silver;" text="9">
                            <font>
-                              <Font size="96.0" />
+                              <Font name="Monospaced Bold" size="96.0" />
                            </font>
                            <padding>
                               <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
