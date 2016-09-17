@@ -122,6 +122,8 @@ public class MainController implements Initializable {
         dice1.setText("0");
         dice2.setText("0");
 
+        // TODO: GET /bdd/game/1/state
+
         log.info(MainController.class.getSimpleName() + " initialized.");
     }
 

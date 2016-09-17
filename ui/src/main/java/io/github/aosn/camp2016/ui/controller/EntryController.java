@@ -42,6 +42,7 @@ public class EntryController implements Initializable {
     @FXML
     public void onStartClicked(MouseEvent event) {
         log.info("Start button clicked.");
+        // TODO: PUT /bdd/game/new
         Launcher.setScreen(getClass(), "main", Launcher.getPrimaryStage().isFullScreen());
     }
 
