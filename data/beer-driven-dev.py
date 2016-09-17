@@ -22,9 +22,9 @@ def hello():
 
 @app.route("bdd/game/<gameid>/state")
 def handle_board_state():
-    turn_str = "turn : 0"
+    turn_str = "turn : " + str(current_player_id)
     players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
-    board_str = "board : " + Board.toJson()
+    board_str = "board : " + board.toJson()
     return "{ " + turn_str + " , " + players_str + ", " + board_str + " }"
 
 

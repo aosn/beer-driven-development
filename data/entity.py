@@ -27,7 +27,7 @@ class Board:
         self.cells = list()
 
     def __new__(cls):
-        if cls.instance_ is None:
+        if cls._instance is None:
             cls._instance = super().__new__(cls)
         return cls._instance
 
