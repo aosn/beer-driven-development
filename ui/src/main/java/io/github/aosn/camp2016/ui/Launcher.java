@@ -75,7 +75,7 @@ public class Launcher extends Application {
         Logs.applyLogLevel(log);
 
         setPrimaryStage(primaryStage);
-        setScreen(getClass(), "main", true);
+        setScreen(getClass(), "start", true);
         log.info("Application started.");
     }
 
