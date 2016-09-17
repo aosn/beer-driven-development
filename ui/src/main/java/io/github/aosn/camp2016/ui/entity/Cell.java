@@ -1,12 +1,14 @@
 package io.github.aosn.camp2016.ui.entity;
 
 /**
- * Created by akari on 2016/09/18.
+ * @author akari on 2016/09/18.
+ * @author LagunaPresa on 2016/09/18.
  */
 public class Cell {
     private int id;
     private long owner;
     private Type type;
+    private CellSpec spec;
 
     public int getId(){
         return id;
@@ -30,5 +32,13 @@ public class Cell {
 
     public void setType(Type type){
         this.type = type;
+    }
+
+    public CellSpec getSpec() {
+        return spec;
+    }
+
+    public void setSpec(CellSpec spec) {
+        this.spec = spec;
     }
 }
