@@ -65,7 +65,7 @@ public class Launcher extends Application {
     }
 
     /**
-     * Displays start.fxml.
+     * Displays entry.fxml.
      *
      * @param primaryStage primary stage
      * @throws Exception when the runtime exception thrown

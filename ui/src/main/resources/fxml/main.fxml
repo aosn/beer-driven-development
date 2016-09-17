@@ -8,8 +8,78 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="wrapper" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.aosn.camp2016.ui.controller.MainController" onMouseClicked="#onWrapperClicked">
+<VBox fx:id="wrapper" onMouseClicked="#onWrapperClicked" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.aosn.camp2016.ui.controller.MainController">
     <children>
-        <Label fx:id="statusLabel" text="00:00"/>
+        <Label fx:id="statusLabel" prefHeight="4.0" prefWidth="727.0" text="Bear Driven Development" />
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <bottom>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="310.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="410.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="410.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="510.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="465.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="494.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="518.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </HBox>
+         </bottom>
+         <right>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="19.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="16.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="19.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="25.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="18.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+         </right>
+         <top>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="310.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="510.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="510.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="556.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="413.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="591.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="19.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="23.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="21.0" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <Label text="Beer Driven Development" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <HBox prefHeight="365.0" prefWidth="538.0" />
     </children>
 </VBox>

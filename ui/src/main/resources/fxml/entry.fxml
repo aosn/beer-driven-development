@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="wrapper" onMouseClicked="#onWrapperClicked" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.aosn.camp2016.ui.controller.EntryController">
+    <children>
+        <Label prefHeight="4.0" prefWidth="727.0" text="Bear Driven Development" />
+      <TextArea fx:id="userList" prefHeight="200.0" prefWidth="200.0" text="mikan&#10;LagunaPresa&#10;akeboshi&#10;MrBearing&#10;intptr-t&#10;kzt-ysmr" />
+      <Button fx:id="startButton" mnemonicParsing="false" text="Start" onMouseClicked="#onStartClicked" />
+    </children>
+</VBox>
