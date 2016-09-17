@@ -8,7 +8,7 @@ public class DiceServiceImpl implements DiceService {
     @Override
     public int[] twice() {
         return JsonDeserializer.deserialize(
-                HttpClient.get("/bdd/game/1/dice").get(),
+                HttpClient.get("/bdd/game/0/dice").get(),
                 Dice.class
         )
                 .map(d -> d.dice)
@@ -18,8 +18,9 @@ public class DiceServiceImpl implements DiceService {
     private static final class Dice {
         public int[] dice;
     }
+
     public static void main(String[] args) {
-//        Config.setApiEndPoint("http://localhost:1337");
+//        Config.setApiEndPoint("http://apps.tasktoys.com:50000");
 //        System.out.println(Arrays.toString(new DiceServiceImpl().twice()));
     }
 }
