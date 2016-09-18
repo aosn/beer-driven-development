@@ -216,6 +216,7 @@ public class MainController implements Initializable {
                 cancelButton.setDisable(false);
                 shuffleButton.setDisable(true);
                 priceLabel.setText(PRICE_LABEL_PREFIX + cell.getSpec().getPrice());
+                return;
             } else if (cell.getOwner() != p.getId()) {
                 p.setCash(p.getCash() - cell.getSpec().getFee());
                 Player owner = getPlayer(cell.getOwner());
