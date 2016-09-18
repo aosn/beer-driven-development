@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'aosn'
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import random
 import json
 from data.entity import Player, Board, Cell
@@ -25,7 +25,8 @@ def handle_board_state():
     turn_str = "turn : " + str(current_player_id)
     players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
     board_str = "board : " + board.toJson()
-    return "{ " + turn_str + " , " + players_str + ", " + board_str + " }"
+    result = "{ " + turn_str + " , " + players_str + ", " + board_str + " }"
+    return jsonify(ResultSet=result)
 
 
 @app.route("/bdd/game/<gameid>/change", methods=['PUT'])
