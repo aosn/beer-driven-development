@@ -21,7 +21,7 @@ def hello():
 
 
 @app.route("bdd/game/<gameid>/state")
-def handle_board_state():
+def handle_board_state(gameid):
     turn_str = "turn : " + str(current_player_id)
     players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
     board_str = "board : " + board.toJson()
@@ -29,9 +29,10 @@ def handle_board_state():
 
 
 @app.route("/bdd/game/<gameid>/change", methods=['PUT'])
-def handle_board_change():
+def handle_board_change(gameid):
     """
     Received a request to change a state.
+    :param gameid: unused(reserve)
     :return: 204(No Content)
     """
     global players
@@ -56,7 +57,7 @@ def handle_board_change():
 
 
 @app.route("/bdd/game/<gameid>/dice")
-def handle_dice():
+def handle_dice(gameid):
     die1 = random.randint(1, 6)
     die2 = random.randint(1, 6)
     return "{dice:[" + str(die1) + "," + str(die2) + "]}"
