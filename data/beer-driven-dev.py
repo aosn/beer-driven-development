@@ -20,7 +20,7 @@ def hello():
     return "Hello World!"
 
 
-@app.route("/bdd/game/<gameid>/state")
+@app.route("/bdd/game/<gameid>/state", methods=['GET'])
 def handle_board_state():
 #    turn_str = "turn : " + str(current_player_id)
 #    players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
@@ -34,7 +34,7 @@ def handle_board_state():
     return jsonify(result)
 
 
-@app.route("/bdd/game/<gameid>/change", methods=['PUT'])
+@app.route("/bdd/game/<gameid>/state", methods=['PUT'])
 def handle_board_change(gameid):
     """
     Received a request to change a state.
