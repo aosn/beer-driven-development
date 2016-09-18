@@ -79,11 +79,12 @@ def handle_new():
     :return: game id
     """
     global players
-    content_body_dict = json.loads(request.data)
+    request_str = request.data.decode('utf-8')
+    content_body_dict = json.loads(request_str)
     names = content_body_dict["users"]
-    players = tuple(map(lambda name, user_id: Player(name, user_id, 0, DEFAULT_CASH), names, range(1, names.length)))
+    players = tuple(map(lambda name, user_id: Player(name, user_id, 0, DEFAULT_CASH), names, range(1, len(names))))
 
-    return 0
+    return jsonify("")
 
 
 def get_players():
