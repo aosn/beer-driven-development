@@ -26,7 +26,7 @@ def handle_board_state():
     players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
     board_str = "board : " + board.toJson()
     result = "{ " + turn_str + " , " + players_str + ", " + board_str + " }"
-    return jsonify(ResultSet=result)
+    return jsonify(result)
 
 
 @app.route("/bdd/game/<gameid>/change", methods=['PUT'])
