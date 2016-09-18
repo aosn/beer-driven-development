@@ -205,8 +205,6 @@ public class MainController implements Initializable {
         }
         p.setPosition(postPosition);
 
-        updatePositionIndicator();
-
         // land operation
         Cell cell = gameState.getBoard().getCells().get(postPosition - 1);
         if (cell.getType() == Type.LAND) {
@@ -225,6 +223,7 @@ public class MainController implements Initializable {
                 // Currently do nothing (Rank up?)
             }
         }
+        updatePositionIndicator();
         next();
     }
 
