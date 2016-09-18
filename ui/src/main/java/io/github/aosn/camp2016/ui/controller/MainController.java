@@ -17,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -30,7 +29,7 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public class MainController implements Initializable {
+public class MainController implements Initializable, ServiceRepository {
 
     private static final Logger log = Logger.getLogger(MainController.class.getName());
 
@@ -162,7 +161,7 @@ public class MainController implements Initializable {
         }
         getAllCell().forEach(c -> c.getChildren().add(new Label()));
 
-        // TODO: PUSH State
+        gameStateService.update(gameState);
 
         log.info(MainController.class.getSimpleName() + " initialized.");
     }
@@ -191,13 +190,12 @@ public class MainController implements Initializable {
 
     @FXML
     public void inShuffleClicked(Event event) {
-        // TODO: GET /bdd/game/1/dice
-        Pair<Integer, Integer> dice = StubData.doShuffle();
-        dice1.setText(dice.getKey().toString());
-        dice2.setText(dice.getValue().toString());
+        int[] dice = diceService.twice();
+        dice1.setText(String.valueOf(dice[0]));
+        dice2.setText(String.valueOf(dice[1]));
 
         // move
-        int steps = dice.getKey() + dice.getValue();
+        int steps = dice[0] + dice[1];
         Player p = gameState.getPlayers().get(turn - 1);
         int prePosition = p.getPosition();
         int postPosition = prePosition + steps;
