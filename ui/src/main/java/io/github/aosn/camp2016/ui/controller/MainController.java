@@ -266,7 +266,7 @@ public class MainController implements Initializable {
 
         // set color to price label
         Label priceLabel = (Label) getCell(p.getPosition()).getChildren().get(LABELS_INDEX_PRICE);
-        priceLabel.setTextFill(p.getColor());
+        priceLabel.setTextFill(getColor(p.getId()));
         priceLabel.setText(c.getSpec().getFee() + "->" + p.getName());
 
         // TODO: State change
@@ -305,7 +305,7 @@ public class MainController implements Initializable {
         label.setPadding(new Insets(10, 10, 10, 10));
         label.setBorder(createUserBorder(false));
         label.setTextFill(Color.WHITE);
-        label.setBackground(new Background(new BackgroundFill(p.getColor(), new CornerRadii(5), new Insets(0, 0, 0, 0))));
+        label.setBackground(new Background(new BackgroundFill(getColor(p.getId()), new CornerRadii(5), new Insets(0, 0, 0, 0))));
         return label;
     }
 
@@ -347,5 +347,24 @@ public class MainController implements Initializable {
             return 1;
         }
         return turn + 1;
+    }
+
+    private Color getColor(long userId) {
+        switch ((int) userId) {
+            case 1:
+                return Color.BLUE;
+            case 2:
+                return Color.GREEN;
+            case 3:
+                return Color.RED;
+            case 4:
+                return Color.ORANGE;
+            case 5:
+                return Color.BROWN;
+            case 6:
+                return Color.PURPLE;
+            default:
+                return Color.BLACK;
+        }
     }
 }

@@ -57,23 +57,4 @@ public class Player {
     public void setCash(int cash){
         this.cash = cash;
     }
-
-    public Color getColor() {
-        switch ((int)getId()) {
-            case 1:
-                return Color.BLUE;
-            case 2:
-                return Color.GREEN;
-            case 3:
-                return Color.RED;
-            case 4:
-                return Color.ORANGE;
-            case 5:
-                return Color.BROWN;
-            case 6:
-                return Color.PURPLE;
-            default:
-                return Color.BLACK;
-        }
-    }
 }
