@@ -2,14 +2,19 @@ package io.github.aosn.camp2016.ui.logic;
 
 import io.github.aosn.camp2016.ui.Config;
 import io.github.aosn.camp2016.ui.service.EntryService;
-import io.github.aosn.camp2016.ui.util.HttpClient;
+import io.github.aosn.camp2016.ui.service.HttpClient;
 
 public class EntryServiceImpl implements EntryService {
 
+    private final HttpClient httpClient;
+
+    public EntryServiceImpl(HttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
+
     @Override
     public boolean create(String userNames) {
-        //FIXME Don't use mock
-        return HttpClient.putMock(
+        return httpClient.put(
                 "/bdd/game/new",
                 new UserNames(userNames.trim().split("\n")));
     }
@@ -36,6 +41,6 @@ public class EntryServiceImpl implements EntryService {
     public static void main(String[] args) {
         Config.setApiEndPoint("http://localhost:1337");
         String names = "mikan\nakari";
-        System.out.println(new EntryServiceImpl().create(names));
+        System.out.println(new EntryServiceImpl(new HttpClientImpl()).create(names));
     }
 }
