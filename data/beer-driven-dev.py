@@ -4,7 +4,7 @@ __author__ = 'aosn'
 from flask import Flask, request, jsonify
 import random
 import json
-from data.entity import Player, Board, Cell
+from entity import Player, Board, Cell
 
 app = Flask(__name__)
 
