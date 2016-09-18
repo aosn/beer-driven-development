@@ -19,7 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +36,8 @@ public class MainController implements Initializable {
 
     private static int START_ADD = 200;
     private static String PRICE_LABEL_PREFIX = "Price: ";
+    private static int LABELS_INDEX_PRICE = 1;
+    private static int LABELS_INDEX_PLAYERS = 2;
 
     @FXML
     public VBox wrapper;
@@ -188,6 +189,7 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
     public void inShuffleClicked(Event event) {
         // TODO: GET /bdd/game/1/dice
         Pair<Integer, Integer> dice = StubData.doShuffle();
@@ -204,6 +206,23 @@ public class MainController implements Initializable {
             p.setCash(p.getCash() + START_ADD);
         }
         p.setPosition(postPosition);
+
+        // update position indicator
+        VBox preCellBox = getCell(prePosition);
+        VBox postCellBox = getCell(postPosition);
+        if (preCellBox.getChildren().get(LABELS_INDEX_PLAYERS) != null) {
+            Label label = (Label) preCellBox.getChildren().get(LABELS_INDEX_PLAYERS);
+            label.setText(label.getText().replaceFirst(p.getName() + " ", "")); // remove player
+        }
+        if (postCellBox.getChildren().get(LABELS_INDEX_PLAYERS) == null) {
+            Label label = new Label();
+            label.setWrapText(true);
+            label.setTextFill(Color.GRAY);
+            postCellBox.getChildren().add(label);
+        }
+        Label postPosLabel = (Label) postCellBox.getChildren().get(LABELS_INDEX_PLAYERS);
+        postPosLabel.setText(postPosLabel.getText() + p.getName() + " ");
+
 
         // land operation
         Cell cell = gameState.getBoard().getCells().get(postPosition - 1);
@@ -223,7 +242,45 @@ public class MainController implements Initializable {
                 // Currently do nothing (Rank up?)
             }
         }
-        updatePositionIndicator();
+        updateUserLabel();
+        next();
+    }
+
+    @FXML
+    public void onBuyClicked(Event event) {
+        buyButton.setDisable(true);
+        cancelButton.setDisable(true);
+        shuffleButton.setDisable(false);
+        priceLabel.setText(PRICE_LABEL_PREFIX + "--");
+
+        // buy
+        Player p = gameState.getPlayers().get(turn - 1);
+        Cell c = gameState.getBoard().getCells().get(p.getPosition() - 1);
+        p.setCash(p.getCash() - c.getSpec().getPrice());
+
+        // owner set
+        c.setOwner(p.getId());
+
+        // display
+        updateUserLabel();
+
+        // set color to price label
+        Label priceLabel = (Label) getCell(p.getPosition()).getChildren().get(LABELS_INDEX_PRICE);
+        priceLabel.setTextFill(p.getColor());
+        priceLabel.setText(c.getSpec().getFee() + "->" + p.getName());
+
+        // TODO: State change
+
+        next();
+    }
+
+    @FXML
+    public void onCancelClicked(Event event) {
+        buyButton.setDisable(true);
+        cancelButton.setDisable(true);
+        shuffleButton.setDisable(false);
+        priceLabel.setText(PRICE_LABEL_PREFIX + "--");
+        updateUserLabel();
         next();
     }
 
@@ -236,7 +293,7 @@ public class MainController implements Initializable {
         userLabels.get(turn - 1).setBorder(createUserBorder(true));
     }
 
-    private void updatePositionIndicator() {
+    private void updateUserLabel() {
         // update position indicator
         userList.getChildren().clear();
         userLabels = gameState.getPlayers().stream().map(this::createUserLabel).collect(Collectors.toList());
@@ -244,7 +301,7 @@ public class MainController implements Initializable {
     }
 
     private Label createUserLabel(Player p) {
-        Label label = new Label(p.getName() + " $" + p.getCash() + " @" + p.getPosition());
+        Label label = new Label(p.getName() + " $" + p.getCash());
         label.setPadding(new Insets(10, 10, 10, 10));
         label.setBorder(createUserBorder(false));
         label.setTextFill(Color.WHITE);
@@ -262,12 +319,6 @@ public class MainController implements Initializable {
         } else {
             return new Label();
         }
-    }
-
-    private Label createUserPosition(Player p) {
-        Label label = new Label("*");
-        label.setTextFill(p.getColor());
-        return label;
     }
 
     private List<VBox> getAllCell() {
@@ -296,39 +347,5 @@ public class MainController implements Initializable {
             return 1;
         }
         return turn + 1;
-    }
-
-    @FXML
-    public void onBuyClicked(Event event) {
-        buyButton.setDisable(true);
-        cancelButton.setDisable(true);
-        shuffleButton.setDisable(false);
-        priceLabel.setText(PRICE_LABEL_PREFIX + "--");
-
-        // buy
-        Player p = gameState.getPlayers().get(turn - 1);
-        Cell c = gameState.getBoard().getCells().get(p.getPosition() - 1);
-        p.setCash(p.getCash() - c.getSpec().getPrice());
-
-        // owner set
-        c.setOwner(p.getId());
-
-        // display
-        updatePositionIndicator();
-        // TODO:
-
-        // TODO: State change
-
-        next();
-    }
-
-    @FXML
-    public void onCancelClicked(Event event) {
-        buyButton.setDisable(true);
-        cancelButton.setDisable(true);
-        shuffleButton.setDisable(false);
-        priceLabel.setText(PRICE_LABEL_PREFIX + "--");
-        updatePositionIndicator();
-        next();
     }
 }
