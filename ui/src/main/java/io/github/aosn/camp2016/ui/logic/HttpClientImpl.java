@@ -22,7 +22,7 @@ public class HttpClientImpl implements HttpClient {
 
     public Optional<String> get(String url, Map<String, ?> params) {
         try {
-            AsyncHttpClient.BoundRequestBuilder builder = client.preparePut(Config.getApiEndPoint() + url);
+            AsyncHttpClient.BoundRequestBuilder builder = client.prepareGet(Config.getApiEndPoint() + url);
             for (Map.Entry<String, ?> p : params.entrySet()) {
                 JsonSerializer.serialize(p.getValue()).map(json -> builder.addQueryParam(p.getKey(), json));
             }

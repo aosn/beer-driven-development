@@ -24,7 +24,7 @@ public class GameStateServiceImpl implements GameStateService {
     @Override
     public boolean update(GameState gameState) {
         return httpClient.put(
-                "/bdd/game/0/change",
+                "/bdd/game/0/state",
                 gameState);
     }
 }

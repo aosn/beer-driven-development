@@ -11,6 +11,7 @@ import io.github.aosn.camp2016.ui.service.GameStateService;
 import io.github.aosn.camp2016.ui.service.HttpClient;
 import io.github.aosn.camp2016.ui.stub.StubData;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ServiceRepository {
@@ -32,8 +33,12 @@ public class ServiceRepository {
         int[] dice = instances.diceService.twice();
         assert 0 < dice[0];
         assert 0 < dice[1];
+        System.out.println("dice: " + Arrays.toString(dice));
 
-        instances.entryService.create("mikan\nakari");
+        {
+            boolean result = instances.entryService.create("mikan\nakari");
+            System.out.println("entry.create: " + result);
+        }
 
         {
             GameState gs1 = StubData.createGame();
