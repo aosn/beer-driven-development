@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'aosn'
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import random
 import json
 from data.entity import Player, Board, Cell
@@ -20,7 +20,7 @@ def hello():
     return "Hello World!"
 
 
-@app.route("bdd/game/<gameid>/state")
+@app.route("/bdd/game/<gameid>/state")
 def handle_board_state(gameid):
     turn_str = "turn : " + str(current_player_id)
     players_str = "players : [ " + " , ".join( map( lambda p: p.toJson , get_players() ) ) + " ]"
@@ -60,7 +60,10 @@ def handle_board_change(gameid):
 def handle_dice(gameid):
     die1 = random.randint(1, 6)
     die2 = random.randint(1, 6)
-    return "{dice:[" + str(die1) + "," + str(die2) + "]}"
+    dice = {
+        "dice": [die1, die2]
+    }
+    return jsonify(dice)
 
 
 @app.route("/bdd/game/new", methods=["PUT"])
