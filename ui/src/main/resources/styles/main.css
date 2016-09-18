@@ -3,7 +3,7 @@
 }
 
 .cell {
-    -fx-min-width: 80px;
-    -fx-min-height: 80px;
+    -fx-min-width: 64px;
+    -fx-min-height: 64px;
     -fx-background-color: whitesmoke;
 }
