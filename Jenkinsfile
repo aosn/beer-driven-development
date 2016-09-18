@@ -4,6 +4,6 @@ stage 'ui-build'
 node {
     git 'https://github.com/aosn/beer-driven-development.git'
     sh 'chmod u+x ./gradlew'
-    sh './gradlew jar'
+    sh './gradlew clean jar'
     archive 'build/libs/*.jar'
 }
