@@ -1,9 +1,13 @@
 package io.github.aosn.camp2016.ui.logic;
 
 import io.github.aosn.camp2016.ui.entity.GameState;
+import io.github.aosn.camp2016.ui.entity.Player;
 import io.github.aosn.camp2016.ui.service.GameStateService;
 import io.github.aosn.camp2016.ui.service.HttpClient;
 import io.github.aosn.camp2016.ui.stub.StubData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameStateServiceImpl implements GameStateService {
 
@@ -15,8 +19,19 @@ public class GameStateServiceImpl implements GameStateService {
 
     @Override
     public GameState getInit(String userNames) {
-        String[] names = userNames.trim().split("\n");
-        return StubData.createGame(); // FIXME Return real data
+        GameState gameState = new GameState();
+        gameState.setPlayers(createPlayers(userNames.trim().split("\n")));
+        gameState.setBoard(StubData.createBoard());
+        return gameState;
+    }
+
+    private static List<Player> createPlayers(String[] names) {
+        int cnt = 0;
+        List<Player> players = new ArrayList<>();
+        for (String name : names) {
+            players.add(new Player(++cnt, name));
+        }
+        return players;
     }
 
     @Override
