@@ -3,6 +3,7 @@ package io.github.aosn.camp2016.ui.logic;
 import io.github.aosn.camp2016.ui.entity.GameState;
 import io.github.aosn.camp2016.ui.service.GameStateService;
 import io.github.aosn.camp2016.ui.service.HttpClient;
+import io.github.aosn.camp2016.ui.stub.StubData;
 
 public class GameStateServiceImpl implements GameStateService {
 
@@ -10,6 +11,12 @@ public class GameStateServiceImpl implements GameStateService {
 
     public GameStateServiceImpl(HttpClient httpClient) {
         this.httpClient = httpClient;
+    }
+
+    @Override
+    public GameState getInit(String userNames) {
+        String[] names = userNames.trim().split("\n");
+        return StubData.createGame(); // FIXME Return real data
     }
 
     @Override

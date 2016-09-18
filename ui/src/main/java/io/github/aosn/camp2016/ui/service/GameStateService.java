@@ -5,6 +5,13 @@ import io.github.aosn.camp2016.ui.entity.GameState;
 public interface GameStateService {
 
     /**
+     * Get initial state
+     *
+     * @return Initial GameState
+     */
+    GameState getInit(String userNames);
+
+    /**
      * Get GameState
      *
      * @return GameState
