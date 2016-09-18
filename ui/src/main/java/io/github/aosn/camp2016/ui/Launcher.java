@@ -65,7 +65,7 @@ public class Launcher extends Application {
     }
 
     /**
-     * Displays start.fxml.
+     * Displays entry.fxml.
      *
      * @param primaryStage primary stage
      * @throws Exception when the runtime exception thrown
@@ -75,7 +75,7 @@ public class Launcher extends Application {
         Logs.applyLogLevel(log);
 
         setPrimaryStage(primaryStage);
-        setScreen(getClass(), "main", true);
+        setScreen(getClass(), "entry", true);
         log.info("Application started.");
     }
 

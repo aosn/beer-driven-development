@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -8,8 +9,278 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="wrapper" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.aosn.camp2016.ui.controller.MainController" onMouseClicked="#onWrapperClicked">
+<VBox fx:id="wrapper" onMouseClicked="#onWrapperClicked" stylesheets="@../styles/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.aosn.camp2016.ui.controller.MainController">
     <children>
-        <Label fx:id="statusLabel" text="00:00"/>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <bottom>
+            <HBox prefHeight="5.0" prefWidth="727.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="cell11" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell10" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: blue;" text="B2" textFill="WHITE" />
+                     </children></VBox>
+                  <VBox fx:id="cell09" layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell08" layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: blue;" text="B1" textFill="WHITE" />
+                     </children></VBox>
+                  <VBox fx:id="cell07" layoutX="310.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell06" layoutX="410.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell05" layoutX="410.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: green;" text="A3" textFill="WHITE" />
+                     </children></VBox>
+                  <VBox fx:id="cell04" layoutX="510.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell03" layoutX="465.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: green;" text="A2">
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="WHITE" />
+                                    <Stop color="WHITE" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                     </children></VBox>
+                  <VBox fx:id="cell02" layoutX="494.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: green;" text="A1" textFill="WHITE" />
+                     </children></VBox>
+                  <VBox fx:id="cell01" layoutX="518.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="START" />
+                     </children></VBox>
+               </children>
+            </HBox>
+         </bottom>
+         <right>
+            <VBox prefHeight="576.0" prefWidth="41.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="cell32" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: red;" text="G1" textFill="WHITE" />
+                     </children></VBox>
+                  <VBox fx:id="cell33" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell34" layoutX="10.0" layoutY="19.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: red;" text="G2" textFill="WHITE" />
+                     </children></VBox>
+                  <VBox fx:id="cell35" layoutX="10.0" layoutY="16.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: red;" text="G3" textFill="WHITE" />
+                     </children></VBox>
+                  <VBox fx:id="cell36" layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell37" layoutX="10.0" layoutY="19.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: yellow;" text="H1" />
+                     </children></VBox>
+                  <VBox fx:id="cell38" layoutX="10.0" layoutY="25.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: yellow;" text="H2" />
+                     </children></VBox>
+                  <VBox fx:id="cell39" layoutX="10.0" layoutY="18.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell40" layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: yellow;" text="H3" />
+                     </children></VBox>
+               </children>
+            </VBox>
+         </right>
+         <top>
+            <HBox prefHeight="40.0" prefWidth="727.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="cell21" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell22" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: pink;" text="E1" />
+                     </children></VBox>
+                  <VBox fx:id="cell23" layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell24" layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: pink;" text="E2" />
+                     </children></VBox>
+                  <VBox fx:id="cell25" layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: pink;" text="E3" />
+                     </children></VBox>
+                  <VBox fx:id="cell26" layoutX="310.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell27" layoutX="510.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: orange;" text="F1" />
+                     </children></VBox>
+                  <VBox fx:id="cell28" layoutX="510.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell29" layoutX="556.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: orange;" text="F2" />
+                     </children></VBox>
+                  <VBox fx:id="cell30" layoutX="413.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: orange;" text="F3" />
+                     </children></VBox>
+                  <VBox fx:id="cell31" layoutX="591.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <VBox prefHeight="576.0" prefWidth="58.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="cell20" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: aqua;" text="D3" />
+                     </children></VBox>
+                  <VBox fx:id="cell19" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: aqua;" text="D2" />
+                     </children></VBox>
+                  <VBox fx:id="cell18" layoutX="10.0" layoutY="19.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell17" layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: aqua;" text="D1" />
+                     </children></VBox>
+                  <VBox fx:id="cell16" layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell15" layoutX="10.0" layoutY="23.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell14" layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: brown;" text="C2" textFill="WHITE" />
+                     </children></VBox>
+                  <VBox fx:id="cell13" layoutX="10.0" layoutY="21.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" text="Event" />
+                     </children></VBox>
+                  <VBox fx:id="cell12" layoutX="10.0" layoutY="22.0" prefHeight="200.0" prefWidth="100.0" styleClass="cell">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="64.0" style="-fx-background-color: brown;" text="C1" textFill="WHITE" />
+                     </children></VBox>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="dice1" style="-fx-background-color: silver;" text="9">
+                           <font>
+                              <Font name="Monospaced Bold" size="96.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="dice2" style="-fx-background-color: silver;" text="9">
+                           <font>
+                              <Font name="Monospaced Bold" size="96.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                  </HBox>
+                  <Button fx:id="shuffleButton" mnemonicParsing="false" onMouseClicked="#inShuffleClicked" text="Shuffle" textAlignment="CENTER">
+                     <font>
+                        <Font size="39.0" />
+                     </font>
+                  </Button>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="priceLabel" alignment="CENTER" contentDisplay="CENTER" text="Price: " textAlignment="CENTER">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="buyButton" mnemonicParsing="false" text="Buy" onMouseClicked="#onBuyClicked">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" onMouseClicked="#onCancelClicked">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </center>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </BorderPane>
+      <HBox fx:id="userList" prefHeight="0.0" prefWidth="727.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></HBox>
     </children>
 </VBox>

@@ -1,34 +1,9 @@
 #wrapper {
-    -fx-background-color: black;
-    -fx-pref-width: 320px;
-    -fx-pref-height: 240px;
     -fx-alignment: center;
 }
 
-Separator {
-    -fx-background-color: #03c2fc;
-}
-
-Label {
-    -fx-text-fill: #03c2fc;
-}
-
-#title {
-    -fx-font-size: 32px;
-}
-
-#clockLabel, #countdownLabel, #timerLabel {
-    -fx-font-family: "DSEG7 Classic Mini-Bold";
-}
-
-#clockLabel {
-    -fx-font-size: 90px;
-}
-
-#countdownLabel {
-    -fx-font-size: 300px;
-}
-
-#timerLabel {
-    -fx-font-size: 650px;
+.cell {
+    -fx-min-width: 64px;
+    -fx-min-height: 64px;
+    -fx-background-color: whitesmoke;
 }
