@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  *
  */
-public class EntryController implements Initializable {
+public class EntryController implements Initializable, ServiceRepository {
 
     private static final Logger log = Logger.getLogger(EntryController.class.getName());
     @FXML
@@ -42,7 +42,7 @@ public class EntryController implements Initializable {
     @FXML
     public void onStartClicked(MouseEvent event) {
         log.info("Start button clicked.");
-        // TODO: PUT /bdd/game/new
+        entryService.create(userList.getText());
         Launcher.setScreen(getClass(), "main", Launcher.getPrimaryStage().isFullScreen());
     }
 
