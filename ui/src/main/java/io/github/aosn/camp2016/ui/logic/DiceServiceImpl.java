@@ -13,15 +13,13 @@ public class DiceServiceImpl implements DiceService {
 
     @Override
     public int[] twice() {
-        return JsonSerializer.deserialize(
-                httpClient.get("/bdd/game/0/dice").get(),
-                Dice.class
-        )
+        return httpClient.get("/bdd/game/0/dice")
+                .flatMap(json -> JsonSerializer.deserialize(json, DiceWrapper.class))
                 .map(d -> d.dice)
-                .orElseGet(() -> new int[]{0, 0});
+                .orElseGet(new int[]{0, 0});
     }
 
-    private static final class Dice {
+    private static final class DiceWrapper {
         public int[] dice;
     }
 

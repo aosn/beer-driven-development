@@ -14,9 +14,8 @@ public class EntryServiceImpl implements EntryService {
 
     @Override
     public boolean create(String userNames) {
-        return httpClient.put(
-                "/bdd/game/new",
-                new UserNames(userNames.trim().split("\n")));
+        UserNames names = new UserNames(userNames.trim().split("\n"));
+        return httpClient.put("/bdd/game/new", names);
     }
 
     public static final class UserNames {

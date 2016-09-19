@@ -4,34 +4,30 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 import io.github.aosn.camp2016.ui.Config;
 import io.github.aosn.camp2016.ui.service.HttpClient;
+import io.github.aosn.util.tryable.Try;
+import io.github.aosn.util.tryable.Tryable;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public class HttpClientImpl implements HttpClient {
+public class HttpClientImpl implements HttpClient, Tryable {
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
-    public Optional<String> get(String url) {
+    public Try<String> get(String url) {
         return get(url, Collections.emptyMap());
     }
 
-    public Optional<String> get(String url, Map<String, ?> params) {
-        try {
+    public Try<String> get(String url, Map<String, ?> params) {
+        return Try(() -> {
             AsyncHttpClient.BoundRequestBuilder builder = client.prepareGet(Config.getApiEndPoint() + url);
             for (Map.Entry<String, ?> p : params.entrySet()) {
                 JsonSerializer.serialize(p.getValue()).map(json -> builder.addQueryParam(p.getKey(), json));
             }
             Future<Response> f = builder.execute();
-            return Optional.of(f.get().getResponseBody());
-        } catch (IOException | ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
+            return f.get().getResponseBody();
+        });
     }
 
     // XXX The body is nothing
@@ -49,6 +45,5 @@ public class HttpClientImpl implements HttpClient {
         String names = "mikan\nakari";
 
         System.out.println(JsonSerializer.serialize(new EntryServiceImpl.UserNames(names.trim().split("\n"))));
-//        get("", )
     }
 }

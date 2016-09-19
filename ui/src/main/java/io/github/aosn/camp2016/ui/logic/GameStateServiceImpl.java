@@ -21,6 +21,7 @@ public class GameStateServiceImpl implements GameStateService {
     public GameState getInit(String userNames) {
         GameState gameState = new GameState();
         gameState.setPlayers(createPlayers(userNames.trim().split("\n")));
+        // FIXME Don't use StubData
         gameState.setBoard(StubData.createBoard());
         return gameState;
     }
@@ -36,17 +37,13 @@ public class GameStateServiceImpl implements GameStateService {
 
     @Override
     public GameState get() {
-        return JsonSerializer.deserialize(
-                httpClient.get("/bdd/game/0/state").get(),
-                GameState.class
-        )
-                .orElseThrow(() -> new RuntimeException("GameState is not found."));
+        return httpClient.get("/bdd/game/0/state")
+                .flatMap(json -> JsonSerializer.deserialize(json, GameState.class))
+                .orElseThrow((e) -> new RuntimeException("GameState is not found.", e));
     }
 
     @Override
     public boolean update(GameState gameState) {
-        return httpClient.put(
-                "/bdd/game/0/state",
-                gameState);
+        return httpClient.put("/bdd/game/0/state", gameState);
     }
 }
