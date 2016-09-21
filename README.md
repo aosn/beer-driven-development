@@ -1,2 +1,2 @@
 # Beer-driven-development
-みんなでモノポリーらしきものを作ろー
+:beers: みんなでモノポリーらしきものを作ろー :beer:
