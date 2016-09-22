@@ -6,7 +6,7 @@ GET         /                             controllers.EntryController.index
 
 GET         /bdd/game/:gameId/dice        controllers.DiceController.roll(gameId: Int)
 
-#POST        /bdd/game                     controllers.GameController.create
+POST        /bdd/game                     controllers.GameController.create
 #GET         /bdd/game/:gameId             controllers.GameController.show(gameId: Int)
 #PUT         /bdd/game/:gameId             controllers.GameController.update(gameId: Int)
 
