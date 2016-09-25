@@ -3,7 +3,7 @@ echo "Beer Driven Development Workflow"
 stage 'ui-build'
 node {
     git 'https://github.com/aosn/beer-driven-development.git'
-    sh 'chmod u+x ./ui/gradlew'
+    sh 'chmod u+x ./frontend-javafx/gradlew'
     sh 'cd ui && ./gradlew clean jar'
-    archive 'ui/build/libs/*.jar'
+    archive 'frontend-javafx/build/libs/*.jar'
 }
